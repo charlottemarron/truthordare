@@ -1,1 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Truth or Dare</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+		body {
+			background-color: #DDCBFF;
+			font-family: Gopher, sans-serif;
+		}
+		h1 {
+			text-align: center;
+			margin-top: 100px;
+		}
+		.container {
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			margin-top: 50px;
+		}
+		.btn {
+			background-color: #62894D;
+			color: white;
+			font-size: 24px;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			margin: 0 20px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+		}
+		.btn:hover {
+			transform: scale(1.1);
+		}
+		.hidden {
+			display: none;
+		}
+		img {
+			display: block;
+			margin: 0 auto;
+			margin-top: 50px;
+			max-width: 90%;
+			height: auto;
+			border-radius: 10px;
+			box-shadow: 0 0 10px #000;
+		}
+		.replay {
+			display: block;
+			margin: 0 auto;
+			margin-top: 50px;
+			background-color: #62894D;
+			color: white;
+			font-size: 24px;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+		}
+		.replay:hover {
+			transform: scale(1.1);
+		}
+	</style>
+</head>
+<body>
+	<h1>Truth or Dare</h1>
+	<div class="container">
+		<button class="btn" id="truthBtn">Truth</button>
+		<button class="btn" id="dareBtn">Dare</button>
+	</div>
 
+	<div class="hidden" id="imageContainer">
+		<img src="" alt="Random Image" id="randomImage">
+		<button class="replay" id="replayBtn">Play Again</button>
+	</div>
+
+	<script>
+		(function() {
+			const truthImages = [
+				"https://images.pexels.com/photos/16856841/pexels-photo-16856841.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load",
+				"https://images.pexels.com/photos/16856838/pexels-photo-16856838.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load",
+				"https://images.pexels.com/photos/16856746/pexels-photo-16856746.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load",
+				"https://images.pexels.com/photos/16856745/pexels-photo-16856745.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load",
+				"https://images.pexels.com/photos/16971359/pexels-photo-16971359.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load",
+				"https://images.pexels.com/photos/16971358/pexels-photo-16971358.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load",
+				"https://images.pexels.com/photos/16971357/pexels-photo-16971357.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load",
+				"https://images.pexels.com/photos/16971356/pexels-photo-16971356.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load",
+				"https://images.pexels.com/photos/16971355/pexels-photo-16971355.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load",
+				"https://images.pexels.com/photos/16856628/pexels-photo-16856628.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load"
+			];
+
+			const dareImages = [
+				"https://images.pexels.com/photos/16856726/pexels-photo-16856726.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load",
+				"https://images.pexels.com/photos/16856727/pexels-photo-16856727.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load",
+				"https://images.pexels.com/photos/16856731/pexels-photo-16856731.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load",
+				"https://images.pexels.com/photos/16856741/pexels-photo-16856741.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load",
+				"https://images.pexels.com/photos/16971347/pexels-photo-16971347.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load",
+				"https://images.pexels.com/photos/16971348/pexels-photo-16971348.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load",
+				"https://images.pexels.com/photos/16971349/pexels-photo-16971349.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load",
+				"https://images.pexels.com/photos/16971350/pexels-photo-16971350.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load",
+				"https://images.pexels.com/photos/16971351/pexels-photo-16971351.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load",
+				"https://images.pexels.com/photos/16856792/pexels-photo-16856792.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load"
+			];
+
+			function getRandomImage(images) {
+				const randomIndex = Math.floor(Math.random() * images.length);
+				return images[randomIndex];
+			}
+
+			function showImage(image) {
+				const imageContainer = document.getElementById("imageContainer");
+				const randomImage = document.getElementById("randomImage");
+				randomImage.src = image;
+				imageContainer.classList.remove("hidden");
+				document.querySelector(".container").classList.add("hidden");
+			}
+
+			document.getElementById("truthBtn").addEventListener("click", function() {
+				const randomImage = getRandomImage(truthImages);
+				showImage(randomImage);
+			});
+
+			document.getElementById("dareBtn").addEventListener("click", function() {
+				const randomImage = getRandomImage(dareImages);
+				showImage(randomImage);
+			});
+
+			document.getElementById("replayBtn").addEventListener("click", function() {
+				const imageContainer = document.getElementById("imageContainer");
+				imageContainer.classList.add("hidden");
+				document.querySelector(".container").classList.remove("hidden");
+			});
+		})();
+	</script>
+</body>
+</html>
